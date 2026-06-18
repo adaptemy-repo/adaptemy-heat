@@ -1,0 +1,10 @@
+{
+    "dataset_name": "VQA_DMOS",
+
+    "max_epoch": 10,
+    "warmup_epoch": 0,
+    "batch_size": 1,
+
+    "clip_length": 5,
+    "frame_stride": 45
+}

@@ -1,0 +1,1 @@
+# On the Use of ViT Embeddings for Blind Omnidirectional Video Quality Assessment Based on  Saliency-guided Viewport Extraction

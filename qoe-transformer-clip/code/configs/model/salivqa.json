@@ -1,0 +1,19 @@
+{
+    "model_name": "SaliVQA",
+
+    "lr": 1e-4,
+    "weight_decay": 1e-3,
+    "num_frame": 5,
+    "eval_start_epoch": 0,
+
+    "use_exp_decay": false,
+    "use_epoch_decay": false,
+    "iterdecay_rate": 0.5,
+    "epochdecay_rate": 0.99999,
+
+    "model_config": {
+        "vqa_in_channels": 4,
+        "video_in_channels": 3,
+        "drop_prob": 0.0
+    }
+}

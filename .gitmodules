@@ -1,6 +1,0 @@
-[submodule "QoE-Models"]
-	path = QoE-Models
-	url = https://github.com/jiantaowu-beep/ViT-ODV.git
-[submodule "hecof"]
-	path = hecof
-	url = https://github.com/jiantaowu-beep/hecof.git

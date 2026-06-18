@@ -1,0 +1,45 @@
+{
+    "model_name": "STADecoder",
+
+    "lr": 1e-5,
+    "weight_decay": 1e-3,
+    "num_frame": 5,
+    "eval_start_epoch": 0,
+
+    "use_exp_decay": false,
+    "use_epoch_decay": false,
+    "iterdecay_rate": 0.5,
+    "epochdecay_rate": 0.99999,
+
+
+    "model_config": {
+        "drop_prob": 0.1,               
+        "lambda_spatial_feat": 1.0,
+        "lambda_temporal_feat": 2.0,
+        "lambda_cls": 1e3,
+        "mask_prob": 0.15,
+        "use_residual": true,
+        "normalize": true,
+
+        "num_features": 768,
+        "input_resolution": 224,
+        "patch_size": 16,
+
+        "margin_cls": 2,
+
+        "coeff_cls": 0,
+        "coeff_time": 1,
+        "coeff_space": 1,
+
+        "criterion_mfp": "mse",
+
+        "spatial_adjacency": "spherical",
+        "heatmap_geometry": "spherical",
+
+        "cls_encoder_type": "mlp",
+
+        "depth": 1,
+        "sigma": 16,
+        "verbose_mode": false
+    }
+}
