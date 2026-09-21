@@ -156,6 +156,12 @@ class SingleAdaptDecoder(BaseDecoder):
     def __init__(self, model_config, cache_path):
         super().__init__(model_config, cache_path)
 
+        self.feature_branch = getattr(model_config, "feature_branch", "neg")
+        if self.feature_branch not in {"pos", "neg"}:
+            raise ValueError(
+                f"feature_branch must be 'pos' or 'neg', got {self.feature_branch!r}"
+            )
+
         self.cls_adapter = SingleAdapter(model_config, encoder_type=model_config.cls_encoder_type)
         self.patch_adapter = SingleAdapter(model_config, encoder_type="mlp")
 
@@ -183,8 +189,8 @@ class SingleAdaptDecoder(BaseDecoder):
         self.spat_score_weight = nn.Parameter(torch.ones(1))
 
     def forward(self, batch, label):
-        frame = batch['frame_neg']
-        cls_feat = batch['cls_neg']
+        frame = batch[f'frame_{self.feature_branch}']
+        cls_feat = batch[f'cls_{self.feature_branch}']
 
 
         # Handle BNC -> B1NC (single time-step) case

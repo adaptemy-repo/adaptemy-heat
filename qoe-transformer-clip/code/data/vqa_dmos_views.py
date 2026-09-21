@@ -104,7 +104,8 @@ class VQA_DMOS_VIEWS(Dataset):
         viewport_height=600,
         viewport_width=540,
         preselect_k=512,
-        nms_threshold_deg=15
+        nms_threshold_deg=15,
+        cache_tag="",
     ):
         super().__init__()
 
@@ -131,6 +132,7 @@ class VQA_DMOS_VIEWS(Dataset):
         self.viewport_resolution = (int(viewport_height), int(viewport_width))
         self.preselect_k = int(preselect_k)
         self.nms_threshold_deg = float(nms_threshold_deg)
+        self.cache_tag = str(cache_tag).strip()
 
         self.model_config_pos = Munch(model_config_pos)
         self.model_config_neg = Munch(model_config_neg)
@@ -233,8 +235,16 @@ class VQA_DMOS_VIEWS(Dataset):
                     continue
                 video_path = Path(video_path)
                 if not video_path.exists():
-                    self.logger.warning("Skipping missing video path: %s", video_path)
-                    continue
+                    video_root = self.data_path / "VQA_ODV" / "data"
+                    candidates = (
+                        video_root / "train" / video_path.name,
+                        video_root / "test" / video_path.name,
+                    )
+                    relocated = next((path for path in candidates if path.exists()), None)
+                    if relocated is None:
+                        self.logger.warning("Skipping missing video path: %s", video_path)
+                        continue
+                    video_path = relocated
                 entries.append({
                     "path": video_path,
                     "dmos": float(dmos_str),
@@ -242,8 +252,9 @@ class VQA_DMOS_VIEWS(Dataset):
         return entries
 
     def get_video(self):
+        cache_tag = f"_{self.cache_tag}" if self.cache_tag else ""
         cache_file = (
-            f"{self.name}_n{len(self.video_list)}_{self.split}_f{self.clip_length}_s{self.frame_stride}_"
+            f"{self.name}{cache_tag}_n{len(self.video_list)}_{self.split}_f{self.clip_length}_s{self.frame_stride}_"
             f"sx{self.saliency_width}x{self.saliency_height}_"
             f"frx{self.frame_width}x{self.frame_height}_"
             f"r{self.input_resolution}_{self.input_type}_"

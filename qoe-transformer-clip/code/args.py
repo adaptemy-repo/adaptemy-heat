@@ -20,7 +20,7 @@ def get_args(options, fixed_args={}, is_unittest=False):
     updated_args.update(get_new_args(options))
     updated_args.update(fixed_args)
 
-    root = Path('../').resolve()
+    root = Path(__file__).resolve().parents[1]
     partial_configs = {}
     for k, v in default_args.items():
         if k.find('config_path') > -1:
@@ -88,7 +88,7 @@ def load_args(args, is_unittest=False):
         # Unit test is executed in `./code/unittest` directory
         root = Path('../../').resolve()
     else:
-        root = Path('../').resolve()
+        root = Path(__file__).resolve().parents[1]
 
     if str(root) not in str(args.ckpt_path):
         args.ckpt_path = root / args.ckpt_path
@@ -118,7 +118,7 @@ def resolve_paths(args, is_unittest=False):
         # Unit test is executed in `./code/unittest` directory
         res_args['root'] = Path('../../').resolve()
     else:
-        res_args['root'] = Path('../').resolve()
+        res_args['root'] = Path(__file__).resolve().parents[1]
     for path in path_list:
         if args[path] is not None:
             if isinstance(args[path], list):

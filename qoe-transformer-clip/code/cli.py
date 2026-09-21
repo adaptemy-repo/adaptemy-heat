@@ -12,6 +12,7 @@ from demo import demo as _demo
 from demo_adapt import demo_adapt as _demo_adapt
 from demo_salivqa import demo_salivqa as _demo_salivqa
 from demo_brisque import demo_brisque as _demo_brisque
+from demo_views_clip import demo_views_clip as _demo_views_clip
 
 @ex.command
 def train(_config):
@@ -58,6 +59,12 @@ def demo_salivqa(_config):
 @ex.command
 def demo_brisque(_config):
     result = _demo_brisque()
+
+    return 0
+
+@ex.command
+def demo_views_clip(_config):
+    result = _demo_views_clip()
 
     return 0
 
