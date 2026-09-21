@@ -1,4 +1,4 @@
-# Saliency-guided viewport quality assessment
+# On the Use of ViT Embeddings for Blind Omnidirectional Video Quality Assessment Based on  Saliency-guided Viewport Extraction
 
 This repository evaluates video quality using saliency-selected viewports and BRISQUE. Start in the project root, then change to `code/` as shown below.
 
