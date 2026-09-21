@@ -24,7 +24,6 @@ For training, first adjust `code/config.py` and the JSON files in `code/configs/
 
 ```bash
 python cli.py train_adapt_single
-python cli.py train_salivqa
 ```
 
 To evaluate CLIP-selected viewports on all available impaired videos and create the video-level PLCC plot:
